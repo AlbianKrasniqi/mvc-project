@@ -14,7 +14,7 @@ exports.addposttest = (req, res) => {
 
   Post.create({
     ...req.body,
-    post_image: `/public/img/postimages/${post_image.name}`,
+    post_image: `/img/postimages/${post_image.name}`,
   });
 
   res.redirect('/posts');
