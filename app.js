@@ -4,12 +4,14 @@ const Handlebars = require('handlebars');
 const {
   allowInsecurePrototypeAccess,
 } = require('@handlebars/allow-prototype-access');
+const fileUpload = require('express-fileupload');
 
 const mainRouter = require('./routes/mainRoutes');
 const postsRouter = require('./routes/postsRoutes');
 
 const app = express();
 
+app.use(fileUpload());
 app.use(express.static('public'));
 
 app.engine(
