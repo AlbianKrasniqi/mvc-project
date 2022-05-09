@@ -10,6 +10,4 @@ router.get('/about', mainController.about);
 
 router.get('/contact', mainController.contact);
 
-router.get('/login', mainController.login);
-
 module.exports = router;
