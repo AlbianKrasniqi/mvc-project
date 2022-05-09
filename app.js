@@ -7,6 +7,7 @@ const {
 const fileUpload = require('express-fileupload');
 const { backDate } = require('./helpers/date');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const mainRouter = require('./routes/mainRoutes');
 const postRouter = require('./routes/postRoutes');
@@ -19,6 +20,9 @@ app.use(
     secret: 'testtest',
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.mongoUrl,
+    }),
   })
 );
 app.use(fileUpload());
