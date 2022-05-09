@@ -21,6 +21,11 @@ exports.addposttest = (req, res) => {
     post_image: `/img/postimages/${post_image.name}`,
   });
 
+  req.session.sessionFlash = {
+    type: 'alert alert-success',
+    message: 'Your Post created successfully',
+  };
+
   res.redirect('/posts');
 };
 
