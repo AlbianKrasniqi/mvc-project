@@ -8,7 +8,8 @@ const fileUpload = require('express-fileupload');
 const { backDate } = require('./helpers/date');
 
 const mainRouter = require('./routes/mainRoutes');
-const postsRouter = require('./routes/postsRoutes');
+const postRouter = require('./routes/postRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', mainRouter);
-app.use('/posts', postsRouter);
+app.use('/posts', postRouter);
+app.use('/users', userRouter);
 
 module.exports = app;

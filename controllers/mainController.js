@@ -21,7 +21,3 @@ exports.contact = (req, res) => {
 exports.login = (req, res) => {
   res.render('site/login');
 };
-
-exports.register = (req, res) => {
-  res.render('site/register');
-};
