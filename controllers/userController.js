@@ -6,7 +6,11 @@ exports.register = (req, res) => {
 
 exports.signup = (req, res) => {
   User.create(req.body, (err, user) => {
-    res.redirect('/');
+    req.session.sessionFlash = {
+      type: 'alert alert-success',
+      message: 'Your User created successfully',
+    };
+    res.redirect('/users/login');
   });
 };
 
