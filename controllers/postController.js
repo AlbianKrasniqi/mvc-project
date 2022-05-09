@@ -2,7 +2,11 @@ const Post = require('../models/postModel');
 const path = require('path');
 
 exports.addpost = (req, res) => {
-  res.render('site/addpost');
+  if (req.session.userId) {
+    return res.render('site/addpost');
+  } else {
+    return res.redirect('/users/login');
+  }
 };
 
 exports.addposttest = (req, res) => {

@@ -6,6 +6,7 @@ const {
 } = require('@handlebars/allow-prototype-access');
 const fileUpload = require('express-fileupload');
 const { backDate } = require('./helpers/date');
+const session = require('express-session');
 
 const mainRouter = require('./routes/mainRoutes');
 const postRouter = require('./routes/postRoutes');
@@ -13,6 +14,13 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
+app.use(
+  session({
+    secret: 'testtest',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(fileUpload());
 app.use(express.static('public'));
 

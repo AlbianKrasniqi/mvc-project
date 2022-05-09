@@ -19,15 +19,13 @@ exports.signin = (req, res) => {
   User.findOne({ email }, (err, user) => {
     if (user) {
       if (user.password == password) {
-        // User session
-        res.redirect('/posts');
-        console.log('ok');
+        req.session.userId = user._id;
+        res.redirect('/');
       } else {
         res.redirect('/users/login');
       }
     } else {
       res.redirect('/users/register');
-      console.log('wrong');
     }
   });
 };
