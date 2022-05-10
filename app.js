@@ -26,6 +26,7 @@ app.use(
   })
 );
 
+// Flash - Message Middleware
 app.use((req, res, next) => {
   res.locals.frontSessionFlash = req.session.backSessionFlash;
   delete req.session.backSessionFlash;
@@ -46,6 +47,21 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Display Link Middleware
+app.use((req, res, next) => {
+  const { userId } = req.session;
+  if (userId) {
+    res.locals = {
+      displayLink: true,
+    };
+  } else {
+    res.locals = {
+      displayLink: false,
+    };
+  }
+  next();
+});
 
 app.use('/', mainRouter);
 app.use('/posts', postRouter);
