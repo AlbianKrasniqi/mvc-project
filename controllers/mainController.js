@@ -9,10 +9,6 @@ exports.about = (req, res) => {
   res.render('site/about');
 };
 
-exports.admin = (req, res) => {
-  res.render('site/admin');
-};
-
 // exports.blog = (req, res) => {
 //   Post.find().then((posts) => {
 //     res.render('site/blog', { posts: posts });

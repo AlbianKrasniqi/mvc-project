@@ -7,8 +7,6 @@ router.get('/', mainController.index);
 
 router.get('/about', mainController.about);
 
-router.get('/admin', mainController.admin);
-
 router.get('/contact', mainController.contact);
 
 module.exports = router;

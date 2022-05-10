@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo');
 const mainRouter = require('./routes/mainRoutes');
 const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
+const adminRouter = require('./routes/admin/indexRoutes');
 
 const app = express();
 
@@ -66,5 +67,6 @@ app.use((req, res, next) => {
 app.use('/', mainRouter);
 app.use('/posts', postRouter);
 app.use('/users', userRouter);
+app.use('/admin', adminRouter);
 
 module.exports = app;
