@@ -27,8 +27,8 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.locals.sessionFlash = req.session.sessionFlash;
-  delete req.session.sessionFlash;
+  res.locals.frontSessionFlash = req.session.backSessionFlash;
+  delete req.session.backSessionFlash;
   next();
 });
 

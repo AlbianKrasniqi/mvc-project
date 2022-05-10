@@ -21,7 +21,7 @@ exports.addposttest = (req, res) => {
     post_image: `/img/postimages/${post_image.name}`,
   });
 
-  req.session.sessionFlash = {
+  req.session.backSessionFlash = {
     type: 'alert alert-success',
     message: 'Your Post created successfully',
   };
