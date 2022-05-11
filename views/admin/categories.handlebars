@@ -17,7 +17,7 @@
     <div class='mb-5'></div>
     <div class='row'>
       <div class='col-md-4'>
-        <form>
+        <form action='categories' method='POST'>
           <div class='row'>
             <div class='col-md-10'>
               <div class='form-group'>
@@ -50,21 +50,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>id</td>
-              <td>name</td>
-              <td>delete</td>
-            </tr>
-            <tr>
-              <td>id</td>
-              <td>name</td>
-              <td>delete</td>
-            </tr>
-            <tr>
-              <td>id</td>
-              <td>name</td>
-              <td>delete</td>
-            </tr>
+            {{#each categories}}
+              <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>delete</td>
+              </tr>
+            {{/each}}
           </tbody>
         </table>
       </div>
