@@ -30,9 +30,11 @@ exports.addposttest = (req, res) => {
 };
 
 exports.getAllPosts = (req, res) => {
-  Post.find({}).then((posts) => {
-    res.render('site/blog', { posts: posts });
-  });
+  Post.find({})
+    .sort({ $natural: -1 })
+    .then((posts) => {
+      res.render('site/blog', { posts: posts });
+    });
 };
 
 exports.singlepost = (req, res) => {
