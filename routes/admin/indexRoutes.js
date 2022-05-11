@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get('/', adminController.admin);
 
+router.get('/categories', adminController.category);
+
 module.exports = router;
