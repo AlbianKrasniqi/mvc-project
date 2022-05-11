@@ -7,6 +7,8 @@ router.get('/', adminController.admin);
 
 router.get('/categories', adminController.category);
 
-router.post('/categories', adminController.createOne);
+router.post('/categories', adminController.createCateogry);
+
+router.delete('/categories/:id', adminController.deleteCategory);
 
 module.exports = router;
