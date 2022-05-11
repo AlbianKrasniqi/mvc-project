@@ -8,6 +8,7 @@ const fileUpload = require('express-fileupload');
 const { backDate } = require('./helpers/date');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const methodOverride = require('method-override');
 
 const mainRouter = require('./routes/mainRoutes');
 const postRouter = require('./routes/postRoutes');
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 
 app.use(fileUpload());
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 
 app.engine(
   'handlebars',
