@@ -1,5 +1,6 @@
 const Post = require('../models/postModel');
 const Category = require('../models/categoryModel');
+const User = require('../models/userModel');
 const path = require('path');
 
 exports.addpost = (req, res) => {
@@ -21,6 +22,7 @@ exports.addposttest = (req, res) => {
   Post.create({
     ...req.body,
     post_image: `/img/postimages/${post_image.name}`,
+    author: req.session.userId,
   });
 
   req.session.backSessionFlash = {
@@ -33,6 +35,7 @@ exports.addposttest = (req, res) => {
 
 exports.getAllPosts = (req, res) => {
   Post.find({})
+    .populate({ path: 'author', model: User })
     .sort({ $natural: -1 })
     .then((posts) => {
       Category.find({}).then((categories) => {
@@ -42,7 +45,11 @@ exports.getAllPosts = (req, res) => {
 };
 
 exports.singlepost = (req, res) => {
-  Post.findById(req.params.id).then((post) => {
-    res.render('site/post', { post: post });
-  });
+  Post.findById(req.params.id)
+    .populate({ path: 'author', model: User })
+    .then((post) => {
+      Category.find({}).then((categories) => {
+        res.render('site/post', { post: post, categories: categories });
+      });
+    });
 };
