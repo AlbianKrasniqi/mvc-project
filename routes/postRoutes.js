@@ -9,7 +9,7 @@ router.post('/test', postsController.addposttest);
 
 // router.get('/', postsController.getAllPosts);
 
-router.get('/', postsController.getAllPosts);
+router.get('/blog', postsController.getAllPosts);
 
 router.get('/:id', postsController.singlepost);
 

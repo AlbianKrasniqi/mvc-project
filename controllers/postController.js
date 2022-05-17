@@ -1,4 +1,5 @@
 const Post = require('../models/postModel');
+const Category = require('../models/categoryModel');
 const path = require('path');
 
 exports.addpost = (req, res) => {
@@ -33,7 +34,9 @@ exports.getAllPosts = (req, res) => {
   Post.find({})
     .sort({ $natural: -1 })
     .then((posts) => {
-      res.render('site/blog', { posts: posts });
+      Category.find({}).then((categories) => {
+        res.render('site/blog', { posts: posts, categories: categories });
+      });
     });
 };
 
