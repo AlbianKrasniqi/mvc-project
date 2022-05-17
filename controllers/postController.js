@@ -3,11 +3,12 @@ const Category = require('../models/categoryModel');
 const path = require('path');
 
 exports.addpost = (req, res) => {
-  if (req.session.userId) {
-    return res.render('site/addpost');
-  } else {
-    return res.redirect('/users/login');
+  if (!req.session.userId) {
+    res.redirect('users/login');
   }
+  Category.find({}).then((categories) => {
+    res.render('site/addpost', { categories: categories });
+  });
 };
 
 exports.addposttest = (req, res) => {
@@ -27,7 +28,7 @@ exports.addposttest = (req, res) => {
     message: 'Your Post created successfully',
   };
 
-  res.redirect('/posts');
+  res.redirect('/posts/blog');
 };
 
 exports.getAllPosts = (req, res) => {
