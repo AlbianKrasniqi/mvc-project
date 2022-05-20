@@ -27,3 +27,7 @@ exports.deleteCategory = (req, res) => {
     res.redirect('/admin/categories');
   });
 };
+
+exports.posts = (req, res) => {
+  res.render('admin/posts');
+};
