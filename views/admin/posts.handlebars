@@ -16,7 +16,7 @@
     <div class='clearfix'></div>
     <div class='mb-5'></div>
     <div class='row'>
-     
+
       <div class='col-md-12'>
         <table class='table'>
           <thead>
@@ -32,8 +32,17 @@
               <tr>
                 <td>{{title}}</td>
                 <td>{{category.name}}</td>
-                <td>edit</td>
-                <td>delete</td>
+                <td>
+                  <a class="btn btn-warning" href="/admin/posts/edit/{{id}}">EDIT</a>
+                </td>
+                <td>
+                  <form
+                    action='/admin/posts/{{id}}?_method=DELETE'
+                    method='POST'
+                  >
+                    <input type='hidden' name='_method' value='DELETE' />
+                    <button type='submit' class='btn btn-danger'>DELETE</button>
+                  </form></td>
               </tr>
             {{/each}}
           </tbody>

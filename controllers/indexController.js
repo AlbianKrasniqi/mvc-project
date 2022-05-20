@@ -37,3 +37,9 @@ exports.posts = (req, res) => {
       res.render('admin/posts', { posts: posts });
     });
 };
+
+exports.deletePost = (req, res) => {
+  Post.deleteOne({ _id: req.params.id }).then(() => {
+    res.redirect('/admin/posts');
+  });
+};
