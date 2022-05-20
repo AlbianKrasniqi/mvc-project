@@ -1,3 +1,4 @@
+const Post = require('../models/postModel');
 const Category = require('../models/categoryModel');
 
 exports.admin = (req, res) => {
@@ -29,5 +30,10 @@ exports.deleteCategory = (req, res) => {
 };
 
 exports.posts = (req, res) => {
-  res.render('admin/posts');
+  Post.find({})
+    .populate({ path: 'category', model: Category })
+    .sort({ $natural: -1 })
+    .then((posts) => {
+      res.render('admin/posts', { posts: posts });
+    });
 };
