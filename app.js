@@ -7,6 +7,7 @@ const {
 const fileUpload = require('express-fileupload');
 const { backDate } = require('./helpers/date');
 const { limit } = require('./helpers/limit');
+const { truncate } = require('./helpers/truncate');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
@@ -41,6 +42,7 @@ app.engine(
     helpers: {
       frontDate: backDate,
       limit: limit,
+      truncate: truncate,
     },
   })
 );
