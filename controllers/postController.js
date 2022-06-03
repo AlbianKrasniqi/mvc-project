@@ -60,6 +60,35 @@ exports.getAllPosts = (req, res) => {
     });
 };
 
+exports.getGroupCategory = (req, res) => {
+  Post.find({ category: req.params.categoryId })
+    .populate({
+      path: 'category',
+      model: Category,
+    })
+    .then((post) => {
+      Category.aggregate([
+        {
+          $lookup: {
+            from: 'posts',
+            localField: '_id',
+            foreignField: 'category',
+            as: 'posts',
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            num_of_posts: { $size: '$posts' },
+          },
+        },
+      ]).then((categories) => {
+        res.render('site/blog', { post: post, categories: categories });
+      });
+    });
+};
+
 exports.singlepost = (req, res) => {
   Post.findById(req.params.id)
     .populate({ path: 'author', model: User })

@@ -7,7 +7,7 @@ router.get('/new', postsController.addpost);
 
 router.post('/test', postsController.addposttest);
 
-// router.get('/', postsController.getAllPosts);
+router.get('/category/:categoryId', postsController.getGroupCategory);
 
 router.get('/blog', postsController.getAllPosts);
 
