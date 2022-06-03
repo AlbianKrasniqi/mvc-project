@@ -49,7 +49,16 @@ exports.singlepost = (req, res) => {
     .populate({ path: 'author', model: User })
     .then((post) => {
       Category.find({}).then((categories) => {
-        res.render('site/post', { post: post, categories: categories });
+        Post.find({})
+          .populate({ path: 'author', model: User })
+          .sort({ $natural: -1 })
+          .then((posts) => {
+            res.render('site/post', {
+              post: post,
+              categories: categories,
+              posts: posts,
+            });
+          });
       });
     });
 };
