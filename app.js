@@ -5,9 +5,7 @@ const {
   allowInsecurePrototypeAccess,
 } = require('@handlebars/allow-prototype-access');
 const fileUpload = require('express-fileupload');
-const { backDate } = require('./helpers/date');
-const { limit } = require('./helpers/limit');
-const { truncate } = require('./helpers/truncate');
+const { backDate, limit, truncate } = require('./helpers/hbs');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
