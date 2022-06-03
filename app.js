@@ -29,19 +29,11 @@ app.use(
   })
 );
 
-// Flash - Message Middleware
-app.use((req, res, next) => {
-  res.locals.frontSessionFlash = req.session.backSessionFlash;
-  delete req.session.backSessionFlash;
-  next();
-});
-
 app.use(fileUpload());
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
 
 // Handlebars helpers
-
 app.engine(
   'handlebars',
   engine({
@@ -69,6 +61,13 @@ app.use((req, res, next) => {
       displayLink: false,
     };
   }
+  next();
+});
+
+// Flash - Message Middleware
+app.use((req, res, next) => {
+  res.locals.frontSessionFlash = req.session.backSessionFlash;
+  delete req.session.backSessionFlash;
   next();
 });
 
