@@ -38,7 +38,23 @@ exports.getAllPosts = (req, res) => {
     .populate({ path: 'author', model: User })
     .sort({ $natural: -1 })
     .then((posts) => {
-      Category.find({}).then((categories) => {
+      Category.aggregate([
+        {
+          $lookup: {
+            from: 'posts',
+            localField: '_id',
+            foreignField: 'category',
+            as: 'posts',
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            num_of_posts: { $size: '$posts' },
+          },
+        },
+      ]).then((categories) => {
         res.render('site/blog', { posts: posts, categories: categories });
       });
     });
