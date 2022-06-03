@@ -62,11 +62,8 @@ exports.getAllPosts = (req, res) => {
 
 exports.getGroupCategory = (req, res) => {
   Post.find({ category: req.params.categoryId })
-    .populate({
-      path: 'category',
-      model: Category,
-    })
-    .then((post) => {
+    .populate({ path: 'category', model: Category })
+    .then((posts) => {
       Category.aggregate([
         {
           $lookup: {
@@ -84,7 +81,7 @@ exports.getGroupCategory = (req, res) => {
           },
         },
       ]).then((categories) => {
-        res.render('site/blog', { post: post, categories: categories });
+        res.render('site/blog', { posts: posts, categories: categories });
       });
     });
 };
