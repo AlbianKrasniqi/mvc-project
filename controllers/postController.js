@@ -64,7 +64,23 @@ exports.singlepost = (req, res) => {
   Post.findById(req.params.id)
     .populate({ path: 'author', model: User })
     .then((post) => {
-      Category.find({}).then((categories) => {
+      Category.aggregate([
+        {
+          $lookup: {
+            from: 'posts',
+            localField: '_id',
+            foreignField: 'category',
+            as: 'posts',
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            num_of_posts: { $size: '$posts' },
+          },
+        },
+      ]).then((categories) => {
         Post.find({})
           .populate({ path: 'author', model: User })
           .sort({ $natural: -1 })
