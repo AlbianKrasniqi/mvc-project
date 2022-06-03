@@ -6,6 +6,7 @@ const {
 } = require('@handlebars/allow-prototype-access');
 const fileUpload = require('express-fileupload');
 const { backDate } = require('./helpers/date');
+const { limit } = require('./helpers/limit');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
@@ -39,11 +40,16 @@ app.use(fileUpload());
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
 
+// Handlebars helpers
+
 app.engine(
   'handlebars',
   engine({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
-    helpers: { frontDate: backDate },
+    helpers: {
+      frontDate: backDate,
+      limit: limit,
+    },
   })
 );
 app.set('view engine', 'handlebars');
