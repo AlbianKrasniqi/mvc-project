@@ -63,6 +63,7 @@ exports.getAllPosts = (req, res) => {
 exports.getGroupCategory = (req, res) => {
   Post.find({ category: req.params.categoryId })
     .populate({ path: 'category', model: Category })
+    .populate({ path: 'author', model: User })
     .then((posts) => {
       Category.aggregate([
         {
