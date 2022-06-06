@@ -2,6 +2,7 @@ const Post = require('../models/postModel');
 const Category = require('../models/categoryModel');
 const User = require('../models/userModel');
 const path = require('path');
+const { router } = require('../app');
 
 exports.addpost = (req, res) => {
   if (!req.session.userId) {
@@ -58,6 +59,40 @@ exports.getAllPosts = (req, res) => {
         res.render('site/blog', { posts: posts, categories: categories });
       });
     });
+};
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
+exports.getSearch = (req, res) => {
+  if (req.query.look) {
+    const regex = new RegExp(escapeRegex(req.query.look), 'gi');
+    Post.find({ title: regex })
+      .populate({ path: 'author', model: User })
+      .sort({ $natural: -1 })
+      .then((posts) => {
+        Category.aggregate([
+          {
+            $lookup: {
+              from: 'posts',
+              localField: '_id',
+              foreignField: 'category',
+              as: 'posts',
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              num_of_posts: { $size: '$posts' },
+            },
+          },
+        ]).then((categories) => {
+          res.render('site/blog', { posts: posts, categories: categories });
+        });
+      });
+  }
 };
 
 exports.getGroupCategory = (req, res) => {
