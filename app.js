@@ -5,7 +5,7 @@ const {
   allowInsecurePrototypeAccess,
 } = require('@handlebars/allow-prototype-access');
 const fileUpload = require('express-fileupload');
-const { backDate, limit, truncate } = require('./helpers/hbs');
+const { backDate, limit, truncate, paginate } = require('./helpers/hbs');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
@@ -41,6 +41,7 @@ app.engine(
       frontDate: backDate,
       limit: limit,
       truncate: truncate,
+      paginate: paginate,
     },
   })
 );

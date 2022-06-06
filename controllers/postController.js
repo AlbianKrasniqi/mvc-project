@@ -34,7 +34,7 @@ exports.addposttest = (req, res) => {
 };
 
 exports.getAllPosts = (req, res) => {
-  const postPerPage = 2;
+  const postPerPage = 4;
   const page = req.query.page || 1;
 
   Post.find({})
