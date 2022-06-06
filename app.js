@@ -14,6 +14,7 @@ const mainRouter = require('./routes/mainRoutes');
 const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
 const adminRouter = require('./routes/admin/indexRoutes');
+const contactRouter = require('./routes/contactRoutes');
 
 const app = express();
 
@@ -76,5 +77,6 @@ app.use('/', mainRouter);
 app.use('/posts', postRouter);
 app.use('/users', userRouter);
 app.use('/admin', adminRouter);
+app.use('/contact', contactRouter);
 
 module.exports = app;
