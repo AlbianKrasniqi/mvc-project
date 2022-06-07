@@ -21,7 +21,12 @@
 
     <div class='row'>
       <div class='col-lg-12'>
-        <form method='POST' action='/contact/email'>
+        {{#if frontSessionFlash.message}}
+          <div class='{{frontSessionFlash.type}}'>
+            {{frontSessionFlash.message}}
+          </div>
+        {{/if}}
+        <form method='POST' action='contact/email'>
           <div class='row'>
             <div class='col-md-6'>
               <div class='form-group'>
