@@ -1,5 +1,4 @@
 exports.index = (req, res) => {
-  console.log(req.session);
   res.render('site/index');
 };
 
