@@ -13,7 +13,7 @@ const methodOverride = require('method-override');
 const mainRouter = require('./routes/mainRoutes');
 const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
-const adminRouter = require('./routes/admin/indexRoutes');
+const adminRouter = require('./routes/indexRoutes');
 const contactRouter = require('./routes/contactRoutes');
 
 const app = express();
